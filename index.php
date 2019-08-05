@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>Login</title>
         <link rel="stylesheet" href="css/estilo.css">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
     <body onload="carregou()">
@@ -13,25 +15,35 @@
         <div class="login-box">
             <h1>Login</h1>
 
-            <form action="" action="post">
+            <form action="controle/usuarioDTO.php" method="post">
                 <div class="textbox">
                     <label for="">Nome</label>
-                    <input type="text" name="" value="">
+                    <input type="text" name="nome" value="">
                 </div>
 
                 <div class="textbox">
-                    <label for="">Sobrenome</label>
-                    <input type="text" name="" value="">
+                    <label for="">Email</label>
+                    <input type="text" name="email" value="">
                 </div>
 
                 <div class="textbox">
                     <label for="">Senha</label>
-                    <input type="password" name="" value="">
+                    <input type="password" name="senha" value="">
                 </div>
 
                 <input class="btn" type="submit" name="" value="Cadastrar">
                 <a href="login.html">Já é cadastrado?</a>
+
+                <?php
+                
+                    session_start();
+                    if(isset($_SESSION['msg'])){
+                        echo $_SESSION['msg'];
+                        unset($_SESSION['msg']);
+                    }
+                ?>
             </div>
+
         </form>
 
         <script>
