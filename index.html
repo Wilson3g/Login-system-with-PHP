@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="css/estilo.css">
+    </head>
+
+    <body onload="carregou()">
+
+        <img id="foto" src="img/bg1.jpg" alt="">
+
+        <div class="login-box">
+            <h1>Login</h1>
+
+            <form action="" action="post">
+                <div class="textbox">
+                    <label for="">Nome</label>
+                    <input type="text" name="" value="">
+                </div>
+
+                <div class="textbox">
+                    <label for="">Sobrenome</label>
+                    <input type="text" name="" value="">
+                </div>
+
+                <div class="textbox">
+                    <label for="">Senha</label>
+                    <input type="password" name="" value="">
+                </div>
+
+                <input class="btn" type="submit" name="" value="Cadastrar">
+                <a href="login.html">Já é cadastrado?</a>
+            </div>
+        </form>
+
+        <script>
+            function carregou(){
+                var agora = new Date()
+                var hora = agora.getHours()
+                var foto = document.getElementById('foto')
+
+                if(hora > 0 && hora <= 12){
+                    foto.src = "img/bg1.jpg"
+                }else if(hora > 12 && hora <= 18){
+                    foto.src = "img/bg2.jpg"
+                }else{
+                    foto.src = "img/bg3.jpg"
+                }
+            }
+        </script>
+    </body>
+</html>
