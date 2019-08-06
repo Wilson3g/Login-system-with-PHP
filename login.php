@@ -13,14 +13,9 @@
         <img id="foto" src="img/bg1.jpg" alt="">
 
         <div class="login-box">
-            <h1>Cadastrar</h1>
+            <h1>Login</h1>
 
             <form action="controle/usuarioDTO.php" method="post">
-                <div class="textbox">
-                    <label for="">Nome</label>
-                    <input type="text" name="nome" value="">
-                </div>
-
                 <div class="textbox">
                     <label for="">Email</label>
                     <input type="text" name="email" value="">
@@ -31,17 +26,9 @@
                     <input type="password" name="senha" value="">
                 </div>
 
-                <input class="btn" type="submit" name="cadastrar" value="Cadastrar">
-                <a href="login.php">Já é cadastrado?</a>
+                <input class="btn" type="submit" name="logar" value="Cadastrar">
+                <a href="index.php">Não é cadastrado?</a>
 
-                <?php
-                
-                    session_start();
-                    if(isset($_SESSION['msg'])){
-                        echo $_SESSION['msg'];
-                        unset($_SESSION['msg']);
-                    }
-                ?>
             </div>
 
         </form>

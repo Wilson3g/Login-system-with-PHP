@@ -1,16 +1,29 @@
 <?php
     include_once('usuarioDAO.php');
 
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    if(isset($_POST['cadastrar'])){
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
 
-    $usuario = new Usuario();
-    $usuario->setNome($nome);
-    $usuario->setEmail($email);
-    $usuario->setSenha($senha);
+        $usuario = new Usuario();
+        $usuario->setNome($nome);
+        $usuario->setEmail($email);
+        $usuario->setSenha($senha);
 
-    $dados = $usuario;
+        $dados = $usuario;
 
-    $usuario->cadastrar($dados);
+        $usuario->cadastrar($dados);
+    }else{
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+        $usuario = new Usuario();
+        $usuario->setEmail($email);
+        $usuario->setSenha($senha);
+
+        $array = $usuario;
+
+        $usuario->logar($array);
+    }
 ?>

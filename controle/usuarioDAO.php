@@ -52,6 +52,22 @@
             }
         }
 
+        public function logar($dados){
+            $select = "SELECT * FROM usuario WHERE email=? AND senha=?";
+            $stmt = $this->pdo->prepare($select);
+            $stmt->bindValue(1, $dados->getEmail());
+            $stmt->bindValue(2, $dados->getSenha());
+            $stmt->execute();
+            $busca = $stmt->fetchALL(PDO::FETCH_ASSOC);
+
+            // $_SESSION['logado'] = $busca['id'];
+
+            $rst = $busca->fetch();
+
+            echo "<pre>";
+            print_r($rst);
+            echo "</pre>";
+        }
         
     }
 ?>
