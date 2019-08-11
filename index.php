@@ -31,7 +31,7 @@
                     <input type="password" name="senha" value="">
                 </div>
 
-                <input class="btn" type="submit" name="cadastrar" value="Cadastrar">
+                <input class="btn btn-danger" type="submit" name="cadastrar" value="Cadastrar">
                 <a href="login.php">Já é cadastrado?</a>
 
                 <?php
@@ -40,6 +40,9 @@
                     if(isset($_SESSION['msg'])){
                         echo $_SESSION['msg'];
                         unset($_SESSION['msg']);
+                    }elseif(isset($_SESSION['msg_user'])){
+                        echo $_SESSION['msg_user'];
+                        unset($_SESSION['msg_user']);
                     }
                 ?>
             </div>

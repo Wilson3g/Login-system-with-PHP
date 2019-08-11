@@ -26,8 +26,16 @@
                     <input type="password" name="senha" value="">
                 </div>
 
-                <input class="btn" type="submit" name="logar" value="Cadastrar">
+                <input class="btn btn-danger" type="submit" name="logar" value="Cadastrar">
                 <a href="index.php">Não é cadastrado?</a>
+
+                <?php
+                    session_start();
+                    if(isset($_SESSION['msg_email'])){
+                        echo $_SESSION['msg_email'];
+                        unset($_SESSION['msg_email']);
+                    }
+                ?>
 
             </div>
 

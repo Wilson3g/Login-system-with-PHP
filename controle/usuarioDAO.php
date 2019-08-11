@@ -37,18 +37,33 @@
 
         public function cadastrar($dados){
 
-            $insert = "INSERT INTO usuario (nome,email,senha) VALUES (?,?,?)";
-            $stmt = $this->pdo->prepare($insert);
-            $stmt->bindValue(1, $dados->getNome());
-            $stmt->bindValue(2, $dados->getEmail());
-            $stmt->bindValue(3, $dados->getSenha());
-            $stmt->execute();
+            $select = "SELECT * FROM usuario WHERE email = ?";
+            $query = $this->pdo->prepare($select);
+            $query->bindValue(1, $dados->getEmail());
+            $query->execute();
 
-            if(isset($stmt)){
-                session_start();
-                $_SESSION['msg'] = '<div class="alert alert-secondary">Cadastro efetuado com sucesso!</div>';
+            $rst = $query->fetch();
+            $email = $rst['email'];
 
-              header('Location: ../index.php');
+            if(isset($query)){
+                if($email == $dados->getEmail()){
+                    session_start();
+                    $_SESSION['msg_email'] = '<div class="alert alert-secondary">Email já existe</div>';
+
+                    header('Location: ../login.php');
+                }else{
+                    $insert = "INSERT INTO usuario (nome,email,senha) VALUES (?,?,?)";
+                    $stmt = $this->pdo->prepare($insert);
+                    $stmt->bindValue(1, $dados->getNome());
+                    $stmt->bindValue(2, $dados->getEmail());
+                    $stmt->bindValue(3, $dados->getSenha());
+                    $stmt->execute();
+
+                    session_start();
+                    $_SESSION['msg'] = '<div class="alert alert-secondary">Cadastro efetuado com sucesso!</div>';
+
+                    header('Location: ../index.php');
+                }
             }
         }
 
@@ -58,15 +73,20 @@
             $stmt->bindValue(1, $dados->getEmail());
             $stmt->bindValue(2, $dados->getSenha());
             $stmt->execute();
-            $busca = $stmt->fetchALL(PDO::FETCH_ASSOC);
 
-            // $_SESSION['logado'] = $busca['id'];
+            $rst = $stmt->fetch();
 
-            $rst = $busca->fetch();
+            if($stmt->rowCount() === 0){
+                session_start();
+                $_SESSION['msg_user'] = '<div class="alert alert-secondary">Usuário não existe</div>'; 
+                header('Location: ../index.php');
+            }else{
+                session_start();
+                $_SESSION['logado'] = $rst['id'];
+                $_SESSION['nome'] = $rst['nome'];
 
-            echo "<pre>";
-            print_r($rst);
-            echo "</pre>";
+                header('Location: ../inicio.php');
+            }
         }
         
     }
